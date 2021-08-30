@@ -1,0 +1,15 @@
+<div *ngIf="isLoggedIn" class="list-group">
+  <div *ngIf="isDataLoaded" class="row justify-content-md-center">
+    <div *ngFor="let task of tasks" class="col-8">
+      <a routerLink="/tasks/{{task.id}}" class="list-group-item list-group-item-action"
+         aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{task.name}}</h5>
+          <small>3 days ago</small>
+        </div>
+        <p class="mb-1">{{task.description}}</p>
+        <small class="text-muted">{{task.isClosed ? 'Closed' : 'Opened'}}</small>
+      </a>
+    </div>
+  </div>
+</div>

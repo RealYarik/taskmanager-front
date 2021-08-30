@@ -1,0 +1,51 @@
+<ul *ngIf="isDataLoaded" class="nav nav-tabs">
+  <li class="nav-item">
+    <a (click)="navigateToTask()" style="cursor: pointer"
+       class="nav-link {{router.url.includes('solutions',0) ?'': 'active'}}">Task</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{router.url.includes('solutions',0) ?'active': ''}}"
+       routerLink="solutions">Solutions</a>
+  </li>
+</ul>
+<app-solution *ngIf="router.url.includes('solutions',0)"></app-solution>
+<div *ngIf="!router.url.includes('solutions',0)">
+  <div *ngIf="isDataLoaded" class="row justify-content-md-center mb-3 mt-3">
+    <label for="staticStatus" class="col-sm-2 col-form-label">Status</label>
+    <div class="col-6">
+            <span readonly="" class="badge mt-2 {{task.isClosed ? 'bg-danger' : 'bg-success'}}" id="staticStatus">
+              {{task.isClosed ? 'Closed' : 'Opened'}}</span>
+    </div>
+  </div>
+  <div class="row justify-content-md-center mb-3">
+    <label for="staticAuthor" class="col-sm-2 col-form-label">Author</label>
+    <div class="col-6">
+      <span class="badge bg-primary mt-2" id="staticAuthor">{{task.author}}</span>
+    </div>
+  </div>
+  <div class="row justify-content-md-center mb-3">
+    <label for="staticName" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-6">
+      <input type="text" readonly="" class="form-control-plaintext" id="staticName" value="{{task.name}}">
+    </div>
+  </div>
+  <div class="row justify-content-md-center mb-3">
+    <label for="staticDate" class="col-sm-2 col-form-label">Create Date</label>
+    <div class="col-6">
+      <input type="text" readonly="" class="form-control-plaintext" id="staticDate" value="10:00">
+    </div>
+  </div>
+  <div class="row justify-content-md-center mb-3">
+    <label for="staticSol" class="col-sm-2 col-form-label">Solutions</label>
+    <div class="col-6">
+      <input type="text" readonly="" class="form-control-plaintext" id="staticSol" value="{{task.solutionNumber}}">
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-6">
+            <textarea class="form-control" id="inputDescription"
+                      readonly>{{task.description}}</textarea></div>
+  </div>
+  <app-task-leader-line [task]="task"></app-task-leader-line>
+</div>
