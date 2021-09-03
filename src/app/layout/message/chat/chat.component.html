@@ -1,0 +1,31 @@
+<button type="submit" (click)="refToMessages()" class="btn btn-secondary btn-sm">Back to messages
+</button>
+<div *ngIf="isLoggedIn" class="messaging">
+  <div class="inbox_msg" *ngIf="isDataLoaded">
+    <div class="mesgs">
+      <div #scrollMe class="msg_history">
+        <div *ngFor="let msg of sortBy(messagesForCurrentChat.concat(webSocketService.messages))">
+          <div class="{{msg.owner == receiverLogin ?'incoming_msg' :'outgoing_msg'}}">
+            <div class="{{msg.owner == receiverLogin ?'received_msg' :'sent_msg'}}">
+              <span style="color:#adb5bd;">{{msg.owner}}</span>
+              <div class="{{msg.owner == receiverLogin ?'received_withd_msg' :''}}">
+                <p>{{msg.text}}</p>
+                <span class="time_date">
+                  {{toDate(msg.sendDate).getHours() + ':' + (toDate(msg.sendDate).getMinutes() < 10 ? '0' + toDate(msg.sendDate).getMinutes() : '' + toDate(msg.sendDate).getMinutes())}}
+                  |    {{getMonth(toDate(msg.sendDate).getMonth())}} {{toDate(msg.sendDate).getDate()}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="type_msg">
+        <div class="input_msg_write">
+          <input type="text" (keyup.enter)="sendMessage()" class="write_msg" placeholder="Type a message"
+                 [(ngModel)]="input"/>
+          <button class="msg_send_btn" type="button" (click)="sendMessage()"><i class="fa fa-paper-plane-o"
+                                                                                aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

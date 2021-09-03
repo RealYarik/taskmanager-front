@@ -20,6 +20,9 @@ import {TaskShowComponent} from './layout/task/task-show/task-show.component';
 import {TaskIndexComponent} from './layout/task/task-index/task-index.component';
 import {TaskLeaderLineComponent} from './layout/task/task-leader-line/task-leader-line.component';
 import { SolutionComponent } from './layout/solution/solution.component';
+import { ChatComponent } from './layout/message/chat/chat.component';
+import { MessageIndexComponent } from './layout/message/message-index/message-index.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { SolutionComponent } from './layout/solution/solution.component';
     TaskShowComponent,
     TaskIndexComponent,
     TaskLeaderLineComponent,
-    SolutionComponent
+    SolutionComponent,
+    ChatComponent,
+    MessageIndexComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,7 @@ import { SolutionComponent } from './layout/solution/solution.component';
     AppRoutingModule,
     MatTooltipModule
   ],
-  providers: [authInterceptorProviders, authErrorInterceptorProvider],
+  providers: [authInterceptorProviders, authErrorInterceptorProvider,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

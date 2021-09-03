@@ -9,6 +9,10 @@ import {MessageComponent} from "./layout/message/message.component";
 import {TaskShowComponent} from "./layout/task/task-show/task-show.component";
 import {TaskIndexComponent} from "./layout/task/task-index/task-index.component";
 import {SolutionComponent} from "./layout/solution/solution.component";
+import {ChatComponent} from "./layout/message/chat/chat.component";
+import {MessageIndexComponent} from "./layout/message/message-index/message-index.component";
+import {MessageGuardService} from "./helper/message-guard.service";
+import {MsGuardForCurrentAccountService} from "./helper/ms-guard-for-current-account.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -24,7 +28,16 @@ const routes: Routes = [
       }
     ]
   },
-  {path: 'messages', component: MessageComponent, canActivate: [AuthGuardService]},
+  {
+    path: 'messages', component: MessageComponent, canActivate: [AuthGuardService], children: [
+      {path: '', component: MessageIndexComponent, canActivate: [AuthGuardService]},
+      {
+        path: ':login/chat',
+        component: ChatComponent,
+        canActivate: [AuthGuardService, MessageGuardService, MsGuardForCurrentAccountService]
+      }
+    ]
+  },
   {path: '', redirectTo: 'main', pathMatch: 'full'}];
 
 @NgModule({

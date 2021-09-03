@@ -1,0 +1,15 @@
+<div class="list-group">
+  <div *ngIf="isDataLoaded" class="row justify-content-md-center gy-2">
+    <div *ngFor="let messagesMap of messagesMapArray" class="col-8">
+      <a
+        routerLink="/messages/{{messagesMap[1][messagesMap[1].length - 1].owner == account.login ? messagesMap[1][messagesMap[1].length - 1].receiver : messagesMap[1][messagesMap[1].length - 1].owner}}/chat"
+        class="list-group-item list-group-item-action" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{messagesMap[0]}}</h5>
+          <small>{{timeAgo(toDateNumber(messagesMap[1][messagesMap[1].length - 1].sendDate))}}</small>
+        </div>
+        <p class="mb-1">{{messagesMap[1][messagesMap[1].length - 1].text}}</p>
+      </a>
+    </div>
+  </div>
+</div>

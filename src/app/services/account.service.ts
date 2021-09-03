@@ -12,11 +12,12 @@ export class AccountService {
   constructor(private http: HttpClient) {
   }
 
-  public getAccountById(id: number): Observable<any> {
-    return this.http.get(USER_API + id);
+  public getAccountByLogin(login: string): Observable<any> {
+    return this.http.get(USER_API + login);
   }
 
   public getCurrentAccount(): Observable<any> {
-    return this.http.get(USER_API);
+    return this.http.get(USER_API + 'current');
   }
+
 }

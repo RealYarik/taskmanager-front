@@ -1,6 +1,7 @@
 export interface Message {
-  id: number;
+  id?: number;
   text: string;
   owner: string;
   receiver: string;
+  sendDate: string;
 }

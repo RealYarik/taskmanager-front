@@ -1,5 +1,5 @@
 <div *ngIf="isLoggedIn" class="list-group">
-  <div *ngIf="isDataLoaded" class="row justify-content-md-center">
+  <div *ngIf="isDataLoaded" class="row justify-content-md-center gy-2">
     <div *ngFor="let task of tasks" class="col-8">
       <a routerLink="/tasks/{{task.id}}" class="list-group-item list-group-item-action"
          aria-current="true">
