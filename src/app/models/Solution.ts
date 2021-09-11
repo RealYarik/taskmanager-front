@@ -1,6 +1,7 @@
 export interface Solution {
-  id: number;
+  id?: number;
   code: string;
-  isSolved: boolean;
+  isSolved?: boolean;
   taskId: number;
+  createDate?: string;
 }

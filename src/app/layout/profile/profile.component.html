@@ -1,0 +1,49 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <span class="nav-link active" aria-current="page">Profile</span>
+  </li>
+</ul>
+<div *ngIf="isDataLoaded">
+  <form [formGroup]="profileForm">
+    <div class="row justify-content-md-center mb-3 mt-5">
+      <label for="staticFirstName" class="col-sm-2 col-form-label">First Name</label>
+      <div class="col-6">
+        <input type="text" class="form-control" matInput
+               formControlName="firstName"
+               value="{{account.firstName}}"
+               id="staticFirstName">
+      </div>
+    </div>
+    <div class="row justify-content-md-center mb-3">
+      <label for="staticLastName" class="col-sm-2 col-form-label">Last Name</label>
+      <div class="col-6">
+        <input type="text" class="form-control" matInput
+               formControlName="lastName"
+               value="{{account.lastName}}"
+               id="staticLastName">
+      </div>
+    </div>
+    <div class="row justify-content-md-center mb-3">
+      <label for="staticLogin" class="col-sm-2 col-form-label">Login</label>
+      <div class="col-6">
+        <div class="input-group">
+          <span class="input-group-text" id="loginAddon">@</span>
+          <input type="text" readonly="" class="form-control" value="{{account.login}}"
+                 aria-describedby="loginAddon" id="staticLogin">
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center mb-5">
+      <label for="staticGender" class="col-sm-2 col-form-label">Gender</label>
+      <div class="col-6">
+        <input type="text" readonly="" class="form-control" id="staticGender"
+               value="{{account.gender}}">
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-6">
+        <input [disabled]="profileForm.invalid" (click)="submit()" class="btn btn-primary" type="submit"
+               value="Save changes"/></div>
+    </div>
+  </form>
+</div>

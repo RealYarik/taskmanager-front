@@ -1,0 +1,43 @@
+<button class="btn btn-close" (click)="close()"></button>
+<div mat-dialog-title>
+  <h2 class="text">New Task</h2>
+</div>
+<mat-dialog-content [formGroup]="form">
+    <div class="justify-content-center mb-3 mt-1">
+      <div class="form-floating">
+        <input type="text" class="form-control"
+               formControlName="name"
+               id="staticName">
+        <label for="staticName">Name</label>
+      </div>
+    </div>
+    <div *ngIf="isLoginsLoaded" class="justify-content-center mb-3">
+      <!--    <mat-form-field  class="example-full-width">-->
+      <div class="form-floating">
+        <input type="text" class="form-control spec border rounded"
+               formControlName="executor"
+               id="executor"
+               name="executor"
+               matInput
+               [matAutocomplete]="auto">
+        <label for="executor">Executor</label>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let login of filteredLogins | async | slice : 0 : 4" [value]="login">
+            {{login}}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+      <!--    </mat-form-field>-->
+    </div>
+    <div class="justify-content-center mb-1">
+      <div class="form-floating">
+        <textarea type="text" class="form-control description"
+                  formControlName="description"
+                  id="staticDescription"></textarea>
+        <label for="staticName">Description</label>
+      </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn  btn-success" [disabled]="form.invalid" (click)="save()">Save</button>
+</mat-dialog-actions>

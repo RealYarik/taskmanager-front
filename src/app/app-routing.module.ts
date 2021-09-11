@@ -13,16 +13,26 @@ import {ChatComponent} from "./layout/message/chat/chat.component";
 import {MessageIndexComponent} from "./layout/message/message-index/message-index.component";
 import {MessageGuardService} from "./helper/message-guard.service";
 import {MsGuardForCurrentAccountService} from "./helper/ms-guard-for-current-account.service";
+import {ProfileComponent} from "./layout/profile/profile.component";
+import {TaskGuardService} from "./helper/task-guard.service";
+import {AdminComponent} from "./layout/admin/admin.component";
+import {AdminUsersComponent} from "./layout/admin/admin-users/admin-users.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'reg', component: RegisterComponent},
   {path: 'main', component: IndexComponent, canActivate: [AuthGuardService]},
   {
+    path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [
+      {path: 'users', component: AdminUsersComponent, canActivate: [AuthGuardService]}
+    ]
+  },
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
+  {
     path: 'tasks', component: TaskComponent, canActivate: [AuthGuardService], children: [
       {path: '', component: TaskIndexComponent, canActivate: [AuthGuardService]},
       {
-        path: ':id', component: TaskShowComponent, canActivate: [AuthGuardService], children: [
+        path: ':id', component: TaskShowComponent, canActivate: [AuthGuardService, TaskGuardService], children: [
           {path: 'solutions', component: SolutionComponent, canActivate: [AuthGuardService]}
         ]
       }

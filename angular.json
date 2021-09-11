@@ -17,6 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "sockjs-client",
+              "stompjs"
+            ],
             "outputPath": "dist/task-manager-front",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -3,6 +3,7 @@ import {Task} from "../../../models/Task";
 import {TokenStorageService} from "../../../services/token-storage.service";
 import {TaskService} from "../../../services/task.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {TimeService} from "../../../services/time.service";
 
 @Component({
   selector: 'app-task-show',
@@ -20,7 +21,8 @@ export class TaskShowComponent implements OnInit {
   constructor(private tokenService: TokenStorageService,
               private taskService: TaskService,
               private route: ActivatedRoute,
-              private _router: Router) {
+              private _router: Router,
+              public timeService: TimeService) {
     this.router = _router;
   }
 
@@ -29,7 +31,7 @@ export class TaskShowComponent implements OnInit {
     this.taskId = Number.parseInt(<string>this.route.snapshot.paramMap.get('id'));
 
     if (this.isLoggedIn) {
-      this.taskService.getSpecificTaskForCurrentAccount(this.taskId)
+      this.taskService.getSpecificTask(this.taskId)
         .subscribe(data => {
           this.task = data;
           this.isDataLoaded = true;

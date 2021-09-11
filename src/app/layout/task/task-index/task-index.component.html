@@ -1,3 +1,16 @@
+<ul class="nav nav-tabs mb-5">
+  <li class="nav-item">
+    <span class="nav-link active" aria-current="page">Tasks</span>
+  </li>
+</ul>
+<div *ngIf="isRolesLoaded">
+  <div *ngIf="roles.includes('ADMIN',0) || roles.includes('MENTOR',0)">
+    <button type="submit" class="btn btn-primary mb-3" (click)="openDialog()">New Task</button>
+  </div>
+</div>
+<div *ngIf="!isNoData">
+  <h1 class="text-center text-muted" style="margin-top:250px"> There are no tasks for you</h1>
+</div>
 <div *ngIf="isLoggedIn" class="list-group">
   <div *ngIf="isDataLoaded" class="row justify-content-md-center gy-2">
     <div *ngFor="let task of tasks" class="col-8">
@@ -5,7 +18,7 @@
          aria-current="true">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{task.name}}</h5>
-          <small>3 days ago</small>
+          <small>{{timeService.timeAgo(task.createDate)}}</small>
         </div>
         <p class="mb-1">{{task.description}}</p>
         <small class="text-muted">{{task.isClosed ? 'Closed' : 'Opened'}}</small>

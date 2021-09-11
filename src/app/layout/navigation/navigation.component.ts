@@ -14,6 +14,7 @@ export class NavigationComponent implements OnInit {
   isLoggedIn = false;
   isDataLoaded = false;
   account: Account;
+  roles: string[];
 
   constructor(private tokenService: TokenStorageService,
               private accountService: AccountService,
@@ -27,6 +28,7 @@ export class NavigationComponent implements OnInit {
       this.accountService.getCurrentAccount()
         .subscribe(data => {
           this.account = data;
+          this.roles = data.roles;
           this.isDataLoaded = true;
         });
     }

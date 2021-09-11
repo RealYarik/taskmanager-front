@@ -28,7 +28,6 @@ export class WebsocketService {
     let webSocket = new SockJS(SERVER_URL);
     this.stompClient = Stomp.over(webSocket);
     const _this = this;
-    console.log("stompClient ok");
     const token = this.tokenService.getToken();
 
     this.accountService.getCurrentAccount()

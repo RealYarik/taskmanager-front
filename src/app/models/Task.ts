@@ -2,8 +2,9 @@ export interface Task {
   id: number;
   name: string;
   description: string;
-  author: string;
+  author?: string;
   executor: string;
-  isClosed: boolean;
+  isClosed?: boolean;
   solutionNumber?: number;
+  createDate: string;
 }

@@ -1,4 +1,4 @@
-<ul *ngIf="isDataLoaded" class="nav nav-tabs">
+<ul *ngIf="isDataLoaded" class="nav nav-tabs mb-5">
   <li class="nav-item">
     <a (click)="navigateToTask()" style="cursor: pointer"
        class="nav-link {{router.url.includes('solutions',0) ?'': 'active'}}">Task</a>
@@ -33,7 +33,9 @@
     <div class="row justify-content-md-center mb-3">
       <label for="staticDate" class="col-sm-2 col-form-label">Create Date</label>
       <div class="col-6">
-        <input type="text" readonly="" class="form-control-plaintext" id="staticDate" value="10:00">
+        <input type="text" readonly="" class="form-control-plaintext" id="staticDate"
+               value="{{timeService.toDate(task.createDate).getHours()+':'+(timeService.toDate(task.createDate).getMinutes() < 10 ? '0'+ timeService.toDate(task.createDate).getMinutes():timeService.toDate(task.createDate).getMinutes())
+               +', '+timeService.getMonth(timeService.toDate(task.createDate).getMonth()) +' ' + timeService.toDate(task.createDate).getDate()}}">
       </div>
     </div>
     <div class="row justify-content-md-center mb-3">

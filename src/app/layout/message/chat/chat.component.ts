@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   webSocketService: WebsocketService;
   message: Message;
-  input;
+  input: string = '';
   receiverLogin: string;
   currentAccount: Account;
   isDataLoaded = false;
@@ -52,7 +52,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           this.currentAccount = dataAcc;
           this.isDataLoaded = true;
         });
-        this.messagesForCurrentChat = this.messagesData[this.receiverLogin];
+        if (this.messagesData[this.receiverLogin] == undefined) {
+          this.messagesForCurrentChat = [];
+        } else {
+          this.messagesForCurrentChat = this.messagesData[this.receiverLogin];
+        }
       });
     this.webSocketService._connect();
     this.scrollToBottom();
@@ -71,6 +75,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       sendDate: <string>this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss')
     }
     this.webSocketService._send(this.message);
+
+    if (this.messagesForCurrentChat == undefined) {
+      this.messagesForCurrentChat = [];
+    }
     this.messagesForCurrentChat.push(this.message);
     this.input = '';
   }
